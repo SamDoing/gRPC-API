@@ -29,7 +29,7 @@ jobs:
        time: 5s
     - name: RunAndTest
       env: 
-           ConnectionStrings__SQLServer: Server=localhost:1433;Database=MyShop;User Id=sa;Password=Pa$$w00rd;
+           ConnectionStrings__SQLServer: Server=localhost;Database=Shop;User=sa;Password=Pa$$w00rd;
       run: |
           cd "gRPC API" && dotnet run -c Release &
           sleep 10 && dotnet test -c Release
