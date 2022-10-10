@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPC_API_Test";
+
+package productProto;
+
+// The greeting service definition.
+service ProductService {
+  // Sends a greeting
+  rpc GetProduct (GetProductRequest) returns (ProductReply);
+  rpc EditProduct (EditProductRequest) returns (ProductReply);
+  rpc CreateProduct (CreateProductRequest) returns (ProductReply);
+  rpc DeleteProduct (GetProductRequest) returns(pVoid);
+}
+
+message pVoid {}
+
+message GetProductRequest {
+    int32 Id = 1;
+}
+
+message CreateProductRequest {
+    string Name = 1;
+    string Description = 2;
+    string Category = 3;
+}
+
+message EditProductRequest
+{
+    int32 id = 1;
+    CreateProductRequest product = 2;
+}
+
+message ProductReply {
+    int32 Id = 1;
+    string Name = 2;
+    string Description = 3;
+    string Category = 4;
+}
