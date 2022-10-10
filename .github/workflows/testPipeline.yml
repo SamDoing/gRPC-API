@@ -26,7 +26,7 @@ jobs:
     - name: Sleep for 5s
       uses: juliangruber/sleep-action@v1
       with:
-       time: 3s
+       time: 5s
     - name: RunAndTest
       env: 
            ConnectionStrings__SQLServer: Server=127.0.0.1:1433;Database=MyShop;User Id=sa;Password=Pa$$w00rd;
