@@ -31,5 +31,5 @@ jobs:
       env: 
            ConnnectionStrings__SQLServer: Server=localhost;Database=MyShop;User=sa;Password=Pa$$w00rd;
       run: |
-          cd "gRPC API" && dotnet run &
-          sleep 2 && dotnet test
+          cd "gRPC API" && dotnet run -c Release &
+          sleep 4 && dotnet test -c Release --no-build
