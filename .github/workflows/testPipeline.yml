@@ -32,4 +32,4 @@ jobs:
            ConnnectionStrings__SQLServer: Server=localhost;Database=MyShop;User=sa;Password=Pa$$w00rd;
       run: |
           cd "gRPC API" && dotnet run &
-          dotnet test
+          sleep 2 && dotnet test
