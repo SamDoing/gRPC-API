@@ -1,5 +1,10 @@
 using Grpc.Net.Client;
+using gRPC_API.Data;
+using gRPC_API.Data.Repositorys;
 using gRPC_API_Test;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using static gRPC_API_Test.ProductService;
 
 namespace gRPC.Tests
@@ -8,11 +13,29 @@ namespace gRPC.Tests
     {
         private readonly GrpcChannel channel;
         private readonly  ProductServiceClient client;
+        private readonly ShopDbContext context;
 
         public ProductAPIIntegration()
         {
             channel = GrpcChannel.ForAddress("http://localhost:5160");
             client = new(channel);
+            
+            var servico = new ServiceCollection();
+
+            var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__SQLServer");
+            servico.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer(connectionString));
+
+            context = servico.BuildServiceProvider().GetService<ShopDbContext>();
+
+            context.Database.EnsureCreated();
+
+            Console.WriteLine($"Connect ? {context.Database.CanConnect()}");
+        }
+
+        [Fact(DisplayName = "Should connect to DB")]
+        public void ConnectionTesting()
+        {
+            Assert.True(context.Database.CanConnect());
         }
 
         [Fact(DisplayName = "Should create, edit, get and delete a product in DB")]
