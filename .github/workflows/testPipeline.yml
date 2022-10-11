@@ -26,10 +26,10 @@ jobs:
     - name: Sleep for 5s
       uses: juliangruber/sleep-action@v1
       with:
-       time: 5s
+       time: 50s
     - name: RunAndTest
       env: 
            ConnectionStrings__SQLServer: Server=localhost;Database=Shop;User=sa;Password=Pa$$w00rd;Integrated Security=False;
       run: |
-          cd "gRPC API" && dotnet run --no-build -c Release &
+          cd "gRPC API" && dotnet run -c Release &
           sleep 10 && dotnet test -c Release
