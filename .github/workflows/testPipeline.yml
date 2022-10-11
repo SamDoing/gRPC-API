@@ -20,8 +20,8 @@ jobs:
       uses: juliangruber/sleep-action@v1
       with:
        time: 5s
-    - name: ComposeS QL
+    - name: Compose SQL
       run: docker-compose up -d
     - name: RunTest
-      run: docker run grpctest -e ConnectionStrings__SQLServer:'Server=db,1433;Database=Shop;User=sa;Password="2@PassWord"';
+      run: docker run grpctest -e 'ConnectionStrings__SQLServer:Server=db,1433;Database=Shop;User=sa;Password="2@PassWord"';
        
