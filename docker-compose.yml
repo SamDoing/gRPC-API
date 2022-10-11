@@ -17,3 +17,5 @@ services:
     image: "grpctest"
     environment:
         ConnectionStrings__SQLServer: Server=localhost,1433;Database={BlogDbName};User=sa;Password="2@PassWord";
+    networks:
+      - gRPC-network
