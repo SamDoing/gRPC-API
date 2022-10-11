@@ -22,14 +22,14 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: RunSQLServer
-      run: docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Pa$$w00rd" -e "MSSQL_PID=Express" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
+      run: docker run -d -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Pa$$w00rd" -e "MSSQL_PID=Express" -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest
     - name: Sleep for 5s
       uses: juliangruber/sleep-action@v1
       with:
        time: 5s
     - name: RunAndTest
       env: 
-           ConnectionStrings__SQLServer: Server=localhost;Database=MyShop;User=sa;Password=Pa$$w00rd;
+           ConnectionStrings__SQLServer: Server=localhost;Database=Shop;User=sa;Password=Pa$$w00rd;Integrated Security=False;
       run: |
           cd "gRPC API" && dotnet run -c Release &
-          sleep 4 && dotnet test -c Release
+          sleep 10 && dotnet test -c Release
