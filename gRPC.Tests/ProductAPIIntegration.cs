@@ -22,7 +22,7 @@ namespace gRPC.Tests
             
             var servico = new ServiceCollection();
 
-            var connectionString = Environment.GetEnvironmentVariable("Server=localhost;Database=Shop;User=sa;Password=Pa$$w00rd;Integrated Security=False;");
+            var connectionString = "Server=localhost;Database=Shop;User=sa;Password=Pa$$w00rd;Integrated Security=False;";
             servico.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer(connectionString));
 
             context = servico.BuildServiceProvider().GetService<ShopDbContext>();
