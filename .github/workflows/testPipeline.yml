@@ -14,11 +14,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: BuildDocker
+    - name: Build Docker Image
       run: docker build -t grpctest .
     - name: Sleep for 5s
       uses: juliangruber/sleep-action@v1
       with:
        time: 5s
-    - name: RunAndTest
-      run: docker-compose up
+    - name: ComposeS QL
+      run: docker-compose up -d
+    - name: RunTest
+      run: docker run grpctest -e ConnectionStrings__SQLServer:'Server=db,1433;Database=Shop;User=sa;Password="2@PassWord"';
+       
