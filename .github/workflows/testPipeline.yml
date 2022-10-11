@@ -23,5 +23,5 @@ jobs:
     - name: Compose SQL
       run: docker-compose up -d
     - name: RunTest
-      run: docker run grpctest -e "ConnectionStrings__SQLServer:Server=localhost,1433;Database=Shop;User=sa;Password=2@PassWord"
+      run: docker run -e "ConnectionStrings__SQLServer:Server=localhost,1433;Database=Shop;User=sa;Password=2@PassWord" grpctest
        
