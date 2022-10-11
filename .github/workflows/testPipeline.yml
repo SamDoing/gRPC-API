@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: RunSQLServer
+    - name: BuildDocker
       run: docker build -t gRPCTest
     - name: Sleep for 5s
       uses: juliangruber/sleep-action@v1
