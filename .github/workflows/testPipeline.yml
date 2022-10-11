@@ -18,6 +18,6 @@ jobs:
     - name: Sleep for 5s
       uses: juliangruber/sleep-action@v1
       with:
-       time: 50s
+       time: 5s
     - name: RunAndTest
       run: docker-compose up
