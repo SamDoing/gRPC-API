@@ -8,10 +8,4 @@ services:
     environment:
         SA_PASSWORD: "2@PassWord"
         ACCEPT_EULA: "Y"
-  gRPC-test:
-    image: "grpctest"
-    depends_on:
-            - db
-    environment:
-        ConnectionStrings__SQLServer: Server=db,1433;Database=Shop;User=sa;Password="2@PassWord";
 
