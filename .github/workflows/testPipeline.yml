@@ -16,12 +16,18 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build Docker Image
       run: docker build -t grpctest .
-    - name: SQLServerUP
+    - name: SQLServer UP
       run: docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=2@PassWord" -p 1433:1433 -d mcr.microsoft.com/mssql/server
     - name: Sleep for 5s
       uses: juliangruber/sleep-action@v1
       with:
        time: 10s
-    - name: RunTest
-      run: docker run --network="host" -e 'ConnectionStrings__SQLServer=Server=localhost,1433;Database=Shop;User=sa;Password=2@PassWord' grpctest
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Run tests
+      env: 
+        ConnectionStrings__SQLServer: Server=localhost,1433;Database=Shop;User=sa;Password=2@PassWord
+      run: dotnet test -c Release
        
