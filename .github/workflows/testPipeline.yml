@@ -1,3 +1,4 @@
+
 name: gRPC
 
 on:
@@ -13,19 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
     - name: RunSQLServer
       run: docker build -t gRPCTest
     - name: Sleep for 5s
       uses: juliangruber/sleep-action@v1
       with:
-       time: 50s
+       time: 5s
     - name: RunAndTest
       run: docker-compose up
