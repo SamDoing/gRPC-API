@@ -1,21 +1,17 @@
 version: "3.7"
-
-networks:
-  gRPC-network:
   
 services:
-  gRPC-sqlserver:
+  db:
     image: "mcr.microsoft.com/mssql/server"
     ports:
       - "1433:1433"
     environment:
         SA_PASSWORD: "2@PassWord"
         ACCEPT_EULA: "Y"
-    networks:
-      - gRPC-network
   gRPC-test:
     image: "grpctest"
+    depends_on:
+            - db
     environment:
-        ConnectionStrings__SQLServer: Server=localhost,1433;Database={BlogDbName};User=sa;Password="2@PassWord";
-    networks:
-      - gRPC-network
+        ConnectionStrings__SQLServer: Server=db,1433;Database=Shop;User=sa;Password="2@PassWord";
+
